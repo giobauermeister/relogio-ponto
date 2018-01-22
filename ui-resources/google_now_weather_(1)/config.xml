@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Google Now Weather Icons 
+		by Naman Rastogi and Cool Droid --> 
+
+<!-- 
+Weather conditions:
+00 = Unknown
+01 = Storm
+02 = Thunderstorm
+03 = Drizzle
+04 = Rain
+05 = Showers 
+06 = Flurries
+07 = Rain and Snow
+08 = Snow
+09 = Hail
+10 = Fog 
+11 = Haze 
+12 = Windy
+13 = Partly Cloudy
+14 = Mostly Cloudy
+15 = Clear 
+16 = Fair
+-->
+
+<!-- The Zooper iconset configuration -->
+<config>
+
+<!-- Name of the iconset -->
+<title>GNW Icon Set</title>
+
+<!-- Description (Author's name) -->
+<description>Naman Rastogi and Cool Droid</description>
+
+<!-- Icon Folder -->
+<icons>icons</icons>
+
+<!-- Icon that represents the Iconset -->
+<demo>showcase.png</demo>
+
+<!-- Default icon (in case no condition is matched) -->
+<default>unknown.png</default>
+
+<!-- Modes
+
+The default syntax of a mode is : 
+
+<mode value = "(Zooper Variable Name)">(Name of Mode)</mode>
+
+We use 10 modes in this iconset, as indicated by the names. 
+
+--> 
+<mode value="#WCCODE#">Current Weather</mode>
+<mode value="#W0CODE#">Today's Weather</mode>
+<mode value="#W1CODE#">Tomorrow's Weather</mode>
+<mode value="#W2CODE#">Weather 2 days from now</mode>
+<mode value="#W3CODE#">Weather 3 days from now</mode>
+<mode value="#W4CODE#">Weather 4 days from now</mode>
+<mode value="#W5CODE#">Weather 5 days from now</mode>
+<mode value="#W6CODE#">Weather 6 days from now</mode>
+<mode value="#W7CODE#">Weather 7 days from now</mode>
+<mode value="DAYNIGHT">Day / Night Indicator</mode>
+
+<!-- From here, we assign the icons to the variable values -->
+
+<!-- Day / Night Indicator Mode -->
+<condition>
+<test>#MODE#=DAYNIGHT</test>
+	<!-- Checking if it is daytime -->
+	<condition>
+		<test>#AISDAY#=1</test>
+		<image>clear-day.png</image>
+	</condition>
+	<!-- Checking if it is nighttime -->
+	<condition>
+		<test>#AISDAY#=0</test>
+		<image>clear-night.png</image>
+	</condition>
+</condition>
+
+<!-- First set - Daytime -->
+<condition>
+
+<!-- Checking if it is daytime -->
+<test>#AISDAY#=1</test>
+
+<!-- Unknown -->
+<condition>
+<test>#MODE#=0</test>
+<image>unknown.png</image>
+</condition>
+
+<!-- Storm -->
+<condition>
+<test>#MODE#=1</test>
+<image>storm-weather-day.png</image>
+</condition>
+
+<!-- Thunderstorm -->
+<condition>
+<test>#MODE#=2</test>
+<image>thunder-day.png</image>
+</condition>
+
+<!-- Drizzle / Rain / Showers -->
+<condition>
+<test>#MODE#=3</test>
+<test>#MODE#=4</test>
+<test>#MODE#=5</test>
+<image>rainy-day.png</image>
+</condition>
+
+<!-- Flurries / Hail / Fog / Haze -->
+<condition>
+<test>#MODE#=6</test>
+<test>#MODE#=9</test>
+<test>#MODE#=10</test>
+<test>#MODE#=11</test>
+<image>haze-day.png</image>
+</condition>
+
+<!-- Rain and Snow -->
+<condition>
+<test>#MODE#=7</test>
+<image>rain-snow-day.png</image>
+</condition>
+
+<!-- Snow -->
+<condition>
+<test>#MODE#=8</test>
+<image>snow-day.png</image>
+</condition>
+
+<!-- Windy -->
+<condition>
+<test>#MODE#=12</test>
+<image>windy-day.png</image>
+</condition>
+
+<!-- Partly Cloudy -->
+<condition>
+<test>#MODE#=13</test>
+<image>partly-cloudy.png</image>
+</condition>
+
+<!-- Mostly Cloudy -->
+<condition>
+<test>#MODE#=14</test>
+<image>mostly-cloudy.png</image>
+</condition>
+
+<!-- Clear / Fair -->
+<condition>
+<test>#MODE#=15</test>
+<test>#MODE#=16</test>
+<image>clear-day.png</image>
+</condition>
+
+<!-- Daytime check over -->
+</condition>
+
+<!-- Second set - Nighttime -->
+<condition>
+
+<!-- Checking if it is Nighttime -->
+<test>#AISDAY#=0</test>
+
+<!-- Unknown -->
+<condition>
+<test>#MODE#=0</test>
+<image>unknown.png</image>
+</condition>
+
+<!-- Storm -->
+<condition>
+<test>#MODE#=1</test>
+<image>storm-weather-night.png</image>
+</condition>
+
+<!-- Thunderstorm -->
+<condition>
+<test>#MODE#=2</test>
+<image>thunder-night.png</image>
+</condition>
+
+<!-- Drizzle / Rain / Showers -->
+<condition>
+<test>#MODE#=3</test>
+<test>#MODE#=4</test>
+<test>#MODE#=5</test>
+<image>rainy-night.png</image>
+</condition>
+
+<!-- Rain and Snow -->
+<condition>
+<test>#MODE#=7</test>
+<image>rain-snow-night.png</image>
+</condition>
+
+<!-- Snow -->
+<condition>
+<test>#MODE#=8</test>
+<image>snow-night.png</image>
+</condition>
+
+<!-- Flurries / Hail / Fog / Haze -->
+<condition>
+<test>#MODE#=6</test>
+<test>#MODE#=9</test>
+<test>#MODE#=10</test>
+<test>#MODE#=11</test>
+<image>haze-night.png</image>
+</condition>
+
+<!-- Windy -->
+<condition>
+<test>#MODE#=12</test>
+<image>windy-night.png</image>
+</condition>
+
+<!-- Partly Cloudy -->
+<condition>
+<test>#MODE#=13</test>
+<image>partly-cloudy-night.png</image>
+</condition>
+
+<!-- Mostly Cloudy -->
+<condition>
+<test>#MODE#=14</test>
+<image>mostly-cloudy-night.png</image>
+</condition>
+
+<!-- Clear / Fair -->
+<condition>
+<test>#MODE#=15</test>
+<test>#MODE#=16</test>
+<image>clear-night.png</image>
+</condition>
+
+<!-- Nighttime check over -->
+</condition>
+
+<!-- Zooper configuration over -->
+</config>
