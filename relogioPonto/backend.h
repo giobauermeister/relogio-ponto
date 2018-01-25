@@ -20,6 +20,7 @@ class BackEnd : public QObject
     Q_PROPERTY(QString employeeName READ employeeName WRITE setEmployeeName NOTIFY employeeNameChanged)
     Q_PROPERTY(QString employeeID READ employeeID WRITE setEmployeeID NOTIFY employeeIDChanged)
     Q_PROPERTY(int timeIndex READ timeIndex WRITE setTimeIndex NOTIFY timeIndexChanged)
+    Q_PROPERTY(bool lunchLocked READ lunchLocked WRITE setLunchLocked NOTIFY lunchLockedChanged)
 
 public:
     explicit BackEnd(QObject *parent = nullptr);
@@ -35,6 +36,7 @@ public:
     void searchTimesheet(const QString& tagID, const QString& name);
     void saveTimesheet(const int& index, const QString& time, const QString& tagID, const QString& data);
     void addRecordToDB(const QString& tagID, const QString& name, const QString& data, const QString& time);
+    bool checkLunchTime(const QString& tagID, const QString& data, const QTime& time);
 
     //--- Declaração dasfunções de Q_PROPERTY do objeto em QML
     QString employeePhoto();
@@ -49,6 +51,9 @@ public:
     int timeIndex();
     void setTimeIndex(const int &timeIndex);
 
+    bool lunchLocked();
+    void setLunchLocked(const bool &lock);
+
 //    bool zeroTag();
 //    void setEmployeeID(const QString &id);
 
@@ -58,6 +63,7 @@ public:
     QString m_employeeName;
     QString m_employeeID;
     int m_timeIndex;
+    bool m_lunchLocked;
 
 private:
     QSerialPort *rfid;
@@ -85,6 +91,7 @@ signals:
     void employeeNameChanged(const QString &name);
     void employeeIDChanged(const QString &id);
     void timeIndexChanged(const int &timeIndex);
+    void lunchLockedChanged(const bool &lock);
 
 
 public slots:

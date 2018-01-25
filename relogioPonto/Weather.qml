@@ -3,9 +3,9 @@ import QtQuick.XmlListModel 2.0
 
 Item {
     Timer {
-        interval: 5000
+        interval: 15000
         running: true
-        repeat: false
+        repeat: true
         onTriggered: makeRequest()
     }
     function makeRequest() {

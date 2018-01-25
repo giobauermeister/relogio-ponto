@@ -23,5 +23,6 @@
         <file>resources/weather-icons/04d.png</file>
         <file>resources/weather-icons/04n.png</file>
         <file>resources/weather-icons/09n.png</file>
+        <file>resources/lock.png</file>
     </qresource>
 </RCC>

@@ -32,7 +32,7 @@ ApplicationWindow {
             console.log("received Photo: " + photo)
             arrows.visible = false
             txtSwipe.visible = false
-            scaleAnimatorIn.running = true            
+            scaleAnimatorIn.running = true
             var date = new Date()
             time.text = Qt.formatDateTime(date, "hh:mm:ss")
             imgEmployeePhoto.source = Qt.resolvedUrl(photo)
@@ -85,6 +85,9 @@ ApplicationWindow {
                 clockOutCircle.color = "#bfbfbf"
                 break
             }
+        }
+        onLunchLockedChanged: {
+            imgEmployeePhotoLock.visible = lock
         }
     }
 
@@ -242,6 +245,14 @@ ApplicationWindow {
                 anchors.fill: parent
                 scale: 0.97
                 cache: false
+            }
+            Image {
+                id: imgEmployeePhotoLock
+                source: "resources/lock.png"
+                anchors.fill: parent
+                scale: 0.97
+                visible: false
+                //cache: false
             }
         }
 
