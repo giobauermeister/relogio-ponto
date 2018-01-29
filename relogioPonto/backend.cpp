@@ -155,10 +155,10 @@ void BackEnd::searchTimesheet(const QString &tagID, const QString &name)
 
     qDebug() << "saving time to database";
     QDate date = QDate::currentDate();
-    qDebug() << date.currentDate().toString("dd-MM-yyyy");
-    //QString dateFormat = date.currentDate().toString("dd-MM-yyyy");
+    qDebug() << date.currentDate().toString("yyyy-MM-dd");
+    //QString dateFormat = date.currentDate().toString("yyyy-MM-dd");
     //-- manipulação da data para testes
-    QString dateFormat = "51-01-2017";
+    QString dateFormat = "2018-01-04";
 
     QTime time = QTime::currentTime();
     qDebug() << "RAW TIME: " << time;
@@ -333,7 +333,7 @@ void BackEnd::addRecordToDB(const QString &tagID, const QString &name, const QSt
 */
 bool BackEnd::checkLunchTime(const QString &tagID, const QString &data, const QTime &time)
 {
-    int lunchMinTime = 180; // tempo mínimo de almoço em segundos | almoço oficial 4380 segundos
+    int lunchMinTime = 120; // tempo mínimo de almoço em segundos | almoço oficial 4380 segundos
     qDebug() << "INSIDE CHECK LUNCH TIME";
     //SELECT ClockIn FROM 'Timesheet' Where TagID = '2100C6D3281C' AND date = '23-12-2017';
     QSqlQuery query;
