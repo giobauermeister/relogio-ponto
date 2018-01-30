@@ -26,7 +26,7 @@ Item {
                 icon = JSON.stringify(jsonResponse.weather[0].icon, null, 2);
                 weatherDescription = JSON.stringify(jsonResponse.weather[0].main, null, 2);
                 //console.log(temp + " " + icon + " " + weatherDescription);
-                temperature.text = temp + "ºC";
+                temperature.text = parseInt(temp, 10) + "ºC";
                 weatherIcon.source = "resources/weather-icons/"+ icon.slice(1, -1) +".png";
                 description.text = weatherDescription.slice(1, -1);
             }

@@ -29,7 +29,7 @@ ApplicationWindow {
 //            time.text = Qt.formatDateTime(date, "hh:mm:ss")
 //        }
         onEmployeePhotoChanged: {
-            console.log("received Photo: " + photo)
+            //console.log("received Photo: " + photo)
             arrows.visible = false
             txtSwipe.visible = false
             scaleAnimatorIn.running = true
@@ -38,12 +38,12 @@ ApplicationWindow {
             imgEmployeePhoto.source = Qt.resolvedUrl(photo)
         }
         onEmployeeNameChanged: {
-            console.log("received Name:" + name)
+            //console.log("received Name:" + name)
             employeeName.text = name
         }
         onEmployeeIDChanged: {
             if(id != "") {
-                console.log("received tagID: " + id)
+                //console.log("received tagID: " + id)
                 tagID.text = "TagID: " + id
             } else {
                 scaleAnimatorOut.running = true
@@ -52,7 +52,7 @@ ApplicationWindow {
             }
         }
         onTimeIndexChanged: {
-            console.log("TIME INDEX CHANGED: " + timeIndex)
+            //console.log("TIME INDEX CHANGED: " + timeIndex)
             switch(timeIndex) {
             case 0:
                 clockInCircle.color = "#009ed2"

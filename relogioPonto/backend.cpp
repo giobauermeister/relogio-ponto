@@ -2,7 +2,7 @@
 
 BackEnd::BackEnd(QObject *parent) : QObject(parent)
 {
-    qDebug() << "created object backend in QML";
+    //qDebug() << "created object backend in QML";
     beepErr = "/home/pi/beepErr";
     beepOK = "/home/pi/beepOK";
     myProcess = new QProcess(this);
@@ -120,10 +120,10 @@ void BackEnd::searchTagID(const QString &tagID)
     {
         if (query.next())
         {
-            qDebug() << "tag number exists";
+            //qDebug() << "tag number exists";
             int idName = query.record().indexOf("EmployeeName");
             QString name = query.value(idName).toString();
-            qDebug() << "===" << name;
+            //qDebug() << "===" << name;
             photoPath = "file:///home/pi/employee-manager-app/vuejs-app-server/dist/static/userphotos/" + tagID + ".png";
             //qDebug() << photoPath;
             //qDebug() << "now is the time to setIdText";
@@ -136,7 +136,7 @@ void BackEnd::searchTagID(const QString &tagID)
             searchTimesheet(tagID, name);
         }
         else {
-            qDebug() << "tag NOT FOUND in database";
+            //qDebug() << "tag NOT FOUND in database";
             setTimeIndex(4);
             myProcess->start(beepErr);
             setEmployeePhoto("resources/unknown-user.png");
@@ -153,18 +153,18 @@ void BackEnd::searchTimesheet(const QString &tagID, const QString &name)
     //QDateTime date = QDateTime::currentDateTime();
     //qDebug() << date.currentDateTime().toString();
 
-    qDebug() << "saving time to database";
+    //qDebug() << "saving time to database";
     QDate date = QDate::currentDate();
-    qDebug() << date.currentDate().toString("yyyy-MM-dd");
+    //qDebug() << date.currentDate().toString("yyyy-MM-dd");
     //QString dateFormat = date.currentDate().toString("yyyy-MM-dd");
     //-- manipulação da data para testes
-    QString dateFormat = "2018-01-04";
+    QString dateFormat = "2018-01-06";
 
     QTime time = QTime::currentTime();
-    qDebug() << "RAW TIME: " << time;
-    qDebug() << time.currentTime().toString("hh:mm");
+    //qDebug() << "RAW TIME: " << time;
+    //qDebug() << time.currentTime().toString("hh:mm");
     QString timeFormat = time.currentTime().toString("hh:mm");
-    qDebug() << " ";
+    //qDebug() << " ";
 
 //    QTime timeCalc = QTime::fromString("17:13");
 //    qDebug() << "Seconds until unlock: " << time.secsTo(timeCalc);
@@ -175,17 +175,17 @@ void BackEnd::searchTimesheet(const QString &tagID, const QString &name)
     query.bindValue(":Data", dateFormat);
     if (query.exec())
     {
-        qDebug() << "inside QUERY EXEC";
+        //qDebug() << "inside QUERY EXEC";
         if(query.next())
         {
-            qDebug() << "found data in database";
+            //qDebug() << "found data in database";
             query.exec();
             while (query.next())
             {
                 for(int i=0;i<4;i++) {
                     if(query.value(i).toString() != "")
                     {
-                        qDebug() << query.value(i).toString();
+                        //qDebug() << query.value(i).toString();
                         if(i == 3) setTimeIndex(3);
                     }
                     else
@@ -194,8 +194,8 @@ void BackEnd::searchTimesheet(const QString &tagID, const QString &name)
                         // LunchIn = 1
                         // LunchOut = 2
                         // ClockOut = 3
-                        qDebug() << "NULL";
-                        qDebug() << i;                        
+                        //qDebug() << "NULL";
+                        //qDebug() << i;
                         if(i == 2 && !checkLunchTime(tagID, dateFormat, time))
                         {
                             setLunchLocked(true);
@@ -224,7 +224,7 @@ void BackEnd::searchTimesheet(const QString &tagID, const QString &name)
             }
         }
         else {
-            qDebug() << "no data found";
+            //qDebug() << "no data found";
             addRecordToDB(tagID,name,dateFormat,timeFormat);
         }
 //        while (query.next())
@@ -265,7 +265,7 @@ void BackEnd::searchTimesheet(const QString &tagID, const QString &name)
 //            }
 //        }
     } else {
-        qDebug() << "ERROR  " << query.lastError();
+        //qDebug() << "ERROR  " << query.lastError();
     }
 }
 
@@ -281,15 +281,15 @@ void BackEnd::saveTimesheet(const int& index, const QString& time, const QString
 //        break;
     case 1:
         query.prepare("UPDATE Timesheets SET LunchIn = (:time) WHERE TagID = (:TagID) AND Data = (:Data)");
-        qDebug() << "saving time to LunchIn";
+        //qDebug() << "saving time to LunchIn";
         break;
     case 2:
         query.prepare("UPDATE Timesheets SET LunchOut = (:time) WHERE TagID = (:TagID) AND Data = (:Data)");
-        qDebug() << "saving time to LunchOut";
+        //qDebug() << "saving time to LunchOut";
         break;
     case 3:
         query.prepare("UPDATE Timesheets SET ClockOut = (:time) WHERE TagID = (:TagID) AND Data = (:Data)");
-        qDebug() << "saving time to ClockOut";
+        //qDebug() << "saving time to ClockOut";
         break;
     }
     query.bindValue(":time", time);
@@ -298,11 +298,11 @@ void BackEnd::saveTimesheet(const int& index, const QString& time, const QString
     if(query.exec())
     {
         setTimeIndex(index);
-        qDebug() << "success updating time";
+        //qDebug() << "success updating time";
     }
     else
     {
-        qDebug() << "error updating time  " << query.lastError();
+        //qDebug() << "error updating time  " << query.lastError();
     }
 
 }
@@ -319,12 +319,12 @@ void BackEnd::addRecordToDB(const QString &tagID, const QString &name, const QSt
     query.bindValue(":time", time);
     if(query.exec())
     {
-         qDebug() << "SUCCESS adding new ClockIn";
+         //qDebug() << "SUCCESS adding new ClockIn";
          setTimeIndex(0);
     }
     else
     {
-        qDebug() << "ERROR adding new ClockIn  " << query.lastError();
+        //qDebug() << "ERROR adding new ClockIn  " << query.lastError();
     }
 }
 
@@ -334,7 +334,7 @@ void BackEnd::addRecordToDB(const QString &tagID, const QString &name, const QSt
 bool BackEnd::checkLunchTime(const QString &tagID, const QString &data, const QTime &time)
 {
     int lunchMinTime = 120; // tempo mínimo de almoço em segundos | almoço oficial 4380 segundos
-    qDebug() << "INSIDE CHECK LUNCH TIME";
+    //qDebug() << "INSIDE CHECK LUNCH TIME";
     //SELECT ClockIn FROM 'Timesheet' Where TagID = '2100C6D3281C' AND date = '23-12-2017';
     QSqlQuery query;
     query.prepare("SELECT LunchIn FROM Timesheets WHERE TagID = (:TagID) AND Data = (:Data)");
@@ -346,19 +346,19 @@ bool BackEnd::checkLunchTime(const QString &tagID, const QString &data, const QT
         {
             int idTime = query.record().indexOf("LunchIn");
             QString lunchInTime = query.value(idTime).toString();
-            qDebug() << "!!! LUNCHIN TIME: " << lunchInTime;
+            //qDebug() << "!!! LUNCHIN TIME: " << lunchInTime;
             QTime timeCalc = QTime::fromString(lunchInTime);
             //QTime tempLunchOutTime = QTime::fromString(time);
             //QTime tempLunchOutTime = time;
-            qDebug() << "Seconds until unlock: " << timeCalc.secsTo(time);
+            //qDebug() << "Seconds until unlock: " << timeCalc.secsTo(time);
             if(timeCalc.secsTo(time) > lunchMinTime)
             {
-                qDebug() << "LUNCH OK";
+                //qDebug() << "LUNCH OK";
                 return true;
             }
             else
             {
-                qDebug() << "LUNCH LOCKED!";
+                //qDebug() << "LUNCH LOCKED!";
                 return false;
             }
         }
@@ -372,7 +372,7 @@ QString BackEnd::employeePhoto()
 
 void BackEnd::setEmployeePhoto(const QString &photo)
 {
-    qDebug() << photo;
+    //qDebug() << photo;
 //    if (photo == m_employeePhoto)
 //        return;
     m_employeePhoto = photo;
@@ -387,7 +387,7 @@ QString BackEnd::employeeName()
 
 void BackEnd::setEmployeeName(const QString &name)
 {
-    qDebug() << name;
+    //qDebug() << name;
 //    if (name == m_employeeName)
 //        return;
     m_employeeName = name;
@@ -402,7 +402,7 @@ QString BackEnd::employeeID()
 
 void BackEnd::setEmployeeID(const QString &id)
 {
-    qDebug() << id;
+    //qDebug() << id;
 //    if (id == m_employeeID)
 //        return;
     m_employeeID = id;
@@ -417,7 +417,7 @@ int BackEnd::timeIndex()
 
 void BackEnd::setTimeIndex(const int &timeindex)
 {
-    qDebug() << timeindex;
+    //qDebug() << timeindex;
 //    if (id == m_employeeID)
 //        return;
     m_timeIndex = timeindex;
@@ -432,7 +432,7 @@ bool BackEnd::lunchLocked()
 
 void BackEnd::setLunchLocked(const bool &lock)
 {
-    qDebug() << lock;
+    //qDebug() << lock;
 //    if (id == m_employeeID)
 //        return;
     m_lunchLocked = lock;
@@ -472,8 +472,8 @@ void BackEnd::readTag()
     if(decodeTag())
     {
         //qDebug() << "inside read tag returned true";
-        qDebug() << ID;
-        qDebug() << " ";
+        //qDebug() << ID;
+        //qDebug() << " ";
         //myProcess->start(beepOK);
         searchTagID(ID);
         timer->start(3000);
